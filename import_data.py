@@ -1,12 +1,12 @@
-import os, sys
+import os
+import sys
 import nltk
-import json, pprint
-import enchant # for spelling check
+import json
+import enchant
 from nltk.corpus import wordnet as wn
 
 
-os.chdir('/home/ykli/DATA/')
-sys.path.append('/home/ykli/DATA/visual_genome_python_driver')
+os.chdir('../')
 
 
 ## Loading data
@@ -37,7 +37,6 @@ for d_id,rs in enumerate(relationships_data):
     for r_id,r in enumerate(rs['relationships']):
         try:
 
-            print('({}, {}): [{}]-[{}]-[{}]\n'.format(d_id, r_id, r['subject']['name'], r['predicate'], r['object']['name']))
 
             normalized_predicate = ' '.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'v') for x in
                                              r['predicate'].strip().encode('ascii').split(' ')])
@@ -89,6 +88,9 @@ for d_id,rs in enumerate(relationships_data):
 
             relationship_count += 1
         except:
+
+            print('({}, {}): [{}]-[{}]-[{}]\n'.format(d_id, r_id, r['subject']['name'], r['predicate'], r['object']['name']))
+            print('Error: [{}]-[{}]-[{}]\n'.format(r['subject']['name'].encode('ascii', 'replace'), r['predicate'].encode('ascii', 'replace'), r['object']['name'].encode('ascii', 'replace')))
             raw_input('Press Enter to continue...')
             pass
     if d_id%1000 == 0:
