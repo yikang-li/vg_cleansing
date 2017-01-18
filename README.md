@@ -14,7 +14,7 @@ For more information, don't hesitate to [contact me](mailto:allen.li.thu@gmail.c
 ## File organization
 For further convinience, please organize the dataset as following:
 
-``
+```
 - ROOT_PATH (the root dir for the dataset)
 	- VG_100K_images (images)
 	- vg_cleansing (the python scripts for visual genome cleansing)
@@ -22,5 +22,5 @@ For further convinience, please organize the dataset as following:
 		- models ([optinal] to store the word2vec models)
 	- Annotations (annotations for visual relationship)
 	- cleansed_data (the output of our cleansing)
-``
+```
 
