@@ -8,7 +8,8 @@ import import_data as imported_data
 print('Done loading visual genome data')
 print('Total predicate num: ' + str(len(imported_data.predicate_count)));
 
-data_root = './VG_100K_images';
+data_root = '../VG_100K_images'
+output_root = '../cleansed_data'
 selected_relationships = {}
 selected_predicate = [];
 predicate_select_thres = 200;
@@ -57,25 +58,25 @@ print('Done output predicate list')
 # f.close();
 # print('Done loading words list!')
 
-total_image_num = len(selected_relationships)
-counter = 0;
-f = open('selected_relationships.txt', 'w');
-for image in selected_relationships:
-    counter += 1;
-    f.write('# ' + str(image) + '\n');
-    f.write(selected_relationships[image]['path'] + '\n');
-    f.write(str(selected_relationships[image]['height']) + '\n');
-    f.write(str(selected_relationships[image]['width']) + '\n');
-    f.write(str(len(selected_relationships[image]['relationships'])) + '\n');
-    for r in selected_relationships[image]['relationships']:
-        f.write(r['subject'].replace(' ', '_'))
-        f.write(' ' + r['predicate'].replace(' ', '_'))
-        f.write(' ' + r['object'].replace(' ', '_'))
-        for item in r['sub_box']:
-            f.write(' ' + str(item))
-        for item in r['obj_box']:
-            f.write(' ' + str(item))
-        f.write('\n')
-    if counter % 100 == 0:
-        print(str(counter) + ' images copied, ' + str(total_image_num - counter) + ' images left.')
-f.close()
+#  total_image_num = len(selected_relationships)
+#  counter = 0;
+#  f = open('selected_relationships.txt', 'w');
+#  for image in selected_relationships:
+#      counter += 1;
+#      f.write('# ' + str(image) + '\n');
+#      f.write(selected_relationships[image]['path'] + '\n');
+#      f.write(str(selected_relationships[image]['height']) + '\n');
+#      f.write(str(selected_relationships[image]['width']) + '\n');
+#      f.write(str(len(selected_relationships[image]['relationships'])) + '\n');
+#      for r in selected_relationships[image]['relationships']:
+#          f.write(r['subject'].replace(' ', '_'))
+#          f.write(' ' + r['predicate'].replace(' ', '_'))
+#          f.write(' ' + r['object'].replace(' ', '_'))
+#          for item in r['sub_box']:
+#              f.write(' ' + str(item))
+#          for item in r['obj_box']:
+#              f.write(' ' + str(item))
+#          f.write('\n')
+#      if counter % 100 == 0:
+#          print(str(counter) + ' images copied, ' + str(total_image_num - counter) + ' images left.')
+#  f.close()

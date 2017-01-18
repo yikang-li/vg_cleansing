@@ -5,7 +5,7 @@ import json
 import enchant
 from nltk.corpus import wordnet as wn
 
-
+current_dir = os.getcwd()
 os.chdir('../')
 
 
@@ -39,11 +39,11 @@ for d_id,rs in enumerate(relationships_data):
 
 
             normalized_predicate = ' '.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'v') for x in
-                                             r['predicate'].strip().encode('ascii').split(' ')])
+                                             r['predicate'].strip().encode('ascii', 'ignore').split(' ')])
             normalized_subject = ' '.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'n') for x in
-                                           r['subject']['name'].strip().encode('ascii').split(' ')])
+                                           r['subject']['name'].strip().encode('ascii', 'ignore').split(' ')])
             normalized_object = ' '.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'n') for x in
-                                           r['object']['name'].strip().encode('ascii').split(' ')])
+                                           r['object']['name'].strip().encode,('ascii', 'ignore').split(' ')])
             if (not en_dict.check(normalized_predicate.replace(' ', '-'))) or \
                     (not en_dict.check(normalized_subject.replace(' ', '-'))) or \
                     (not en_dict.check(normalized_object.replace(' ', '-'))):
@@ -91,7 +91,7 @@ for d_id,rs in enumerate(relationships_data):
 
             print('({}, {}): [{}]-[{}]-[{}]\n'.format(d_id, r_id, r['subject']['name'], r['predicate'], r['object']['name']))
             print('Error: [{}]-[{}]-[{}]\n'.format(r['subject']['name'].encode('ascii', 'replace'), r['predicate'].encode('ascii', 'replace'), r['object']['name'].encode('ascii', 'replace')))
-            raw_input('Press Enter to continue...')
+            #  raw_input('Press Enter to continue...')
             pass
     if d_id%1000 == 0:
         print(str(d_id) + ' images processed, ' + str(relationship_count) + ' relationships');
@@ -101,3 +101,6 @@ print('Currently, we have ' + str(relationship_count) + ' relationship tuples\n'
 print('Currently, we have ' + str(len(predicate_count)) + ' predicates\n');
 print('Spelling error: {}\n'.format(spelling_error_counter))
 print('Length matching error: {}'.format(length_matching_counter))
+
+
+os.chdir(current_dir)

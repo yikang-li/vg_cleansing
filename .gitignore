@@ -1,2 +1,7 @@
 .idea/
+temp_data/
+models/
+models
+*.swp
+*.ipynb_checkpoints/
 *.pyc
