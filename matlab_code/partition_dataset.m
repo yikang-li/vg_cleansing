@@ -1,21 +1,5 @@
-function partition_dataset(data_dir, source_annotation_dir, output_dir, suffix)
+function partition_dataset(data_dir, source_annotation_dir, output_dir)
     % this function is assumed to be placed at parent dir of 'faster_rcnn'
-    % 
-    if ~exist('suffix', 'var') || isempty(suffix)
-        suffix = 'deps';
-    end
-
-    if ~exist('data_dir', 'var') || isempty(data_dir)
-        data_dir = fullfile(pwd, 'VG_100K_images');
-    end
-    
-    if ~exist('source_annotation_dir', 'var') || isempty(source_annotation_dir)
-        source_annotation_dir = fullfile(pwd, ['data_annotation_', suffix]);
-    end
-    
-    if ~exist('output_dir', 'var') || isempty(output_dir)
-        output_dir = ['../visual_phrase/visual_genome_', suffix];
-    end
     
     
     if ~exist(output_dir, 'dir')
@@ -64,15 +48,6 @@ function partition_dataset(data_dir, source_annotation_dir, output_dir, suffix)
     for i = 1:1:length(loaded_dataset.image_ids)
         copyfile(fullfile(data_dir, loaded_dataset.image_ids{i}), ...
             fullfile(output_data_dir_val, loaded_dataset.image_ids{i}));
-        if mod(i, 100) == 0
-            fprintf('%d images copied, %d left\n', i, length(loaded_dataset.image_ids) - i);
-        end
-    end
-    
-    loaded_dataset = load(fullfile(source_annotation_dir, 'vg_relationship_test_ids.mat'), 'image_ids');
-    for i = 1:1:length(loaded_dataset.image_ids)
-        copyfile(fullfile(data_dir, loaded_dataset.image_ids{i}), ...
-            fullfile(output_data_dir_test, loaded_dataset.image_ids{i}));
         if mod(i, 100) == 0
             fprintf('%d images copied, %d left\n', i, length(loaded_dataset.image_ids) - i);
         end
