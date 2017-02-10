@@ -11,8 +11,6 @@ try
     fprintf('Done loading.\n');
 catch
     fprintf('Fail to load the processed data.\nStart now...\n');
-    load(word_vec_phrase_path, 'word_vec');
-    fprintf('Done loading word2vec model\n');
 
     fid = fopen(raw_relationship_path, 'r');
     assert(fid >= 0);
@@ -54,29 +52,27 @@ catch
             subject = char(sscanf(phrase_items{i}, subject_mask, [1, inf]));
             predicate = char(sscanf(phrase_items{i}, predicate_mask, [1, inf]));
             object = char(sscanf(phrase_items{i}, object_mask, [1, inf]));
-            if isfield(word_vec, subject) && isfield(word_vec, predicate) && isfield(word_vec, object)
-                temp_counter = temp_counter +1;
-                temp_relationship{temp_counter}.phrase = ...
-                    {subject, predicate, object};
-                temp_relationship{temp_counter}.subBox = ...
-                    sscanf(phrase_items{i}, sub_box_mask, [1, inf]);
-                temp_relationship{temp_counter}.objBox = ...
-                    sscanf(phrase_items{i}, obj_box_mask, [1, inf]);
-                if isfield(object_counter, subject)
-                    object_counter.(subject) = object_counter.(subject) + 1;
-                else
-                    object_counter.(subject) = 1;
-                end
-                if isfield(object_counter, object)
-                    object_counter.(object) = object_counter.(object) + 1;
-                else
-                    object_counter.(object) = 1;
-                end
-                if isfield(predicate_counter, predicate)
-                    predicate_counter.(predicate) = predicate_counter.(predicate) + 1;
-                else
-                    predicate_counter.(predicate) = 1;
-                end
+            temp_counter = temp_counter +1;
+            temp_relationship{temp_counter}.phrase = ...
+                {subject, predicate, object};
+            temp_relationship{temp_counter}.subBox = ...
+                sscanf(phrase_items{i}, sub_box_mask, [1, inf]);
+            temp_relationship{temp_counter}.objBox = ...
+                sscanf(phrase_items{i}, obj_box_mask, [1, inf]);
+            if isfield(object_counter, subject)
+                object_counter.(subject) = object_counter.(subject) + 1;
+            else
+                object_counter.(subject) = 1;
+            end
+            if isfield(object_counter, object)
+                object_counter.(object) = object_counter.(object) + 1;
+            else
+                object_counter.(object) = 1;
+            end
+            if isfield(predicate_counter, predicate)
+                predicate_counter.(predicate) = predicate_counter.(predicate) + 1;
+            else
+                predicate_counter.(predicate) = 1;
             end
         end
         if isempty(temp_relationship)

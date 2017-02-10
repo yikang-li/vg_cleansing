@@ -8,7 +8,6 @@ function partition_dataset(data_dir, source_annotation_dir, output_dir)
     
     output_data_dir_train = fullfile(output_dir, 'vg_train_images');
     output_data_dir_val = fullfile(output_dir, 'vg_val_images');
-    output_data_dir_test = fullfile(output_dir, 'vg_test_images');
     output_annotation_dir = fullfile(output_dir, 'annotations');
     
     if ~exist(output_data_dir_train, 'dir')
@@ -18,11 +17,7 @@ function partition_dataset(data_dir, source_annotation_dir, output_dir)
     if ~exist(output_data_dir_val, 'dir')
         mkdir(output_data_dir_val);
     end
-    
-    if ~exist(output_data_dir_test, 'dir')
-        mkdir(output_data_dir_test);
-    end
-    
+   
     if ~exist(output_annotation_dir, 'dir')
         mkdir(output_annotation_dir);
     end
