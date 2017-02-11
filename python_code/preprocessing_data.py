@@ -34,22 +34,23 @@ for d_id,rs in enumerate(relationships_data):
     im_relationships = {}
     for r_id,r in enumerate(rs['relationships']):
         try:
-            normalized_predicate = ' '.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'v') for x in
-                                             r['predicate'].strip().encode('ascii', 'replace').split(' ')])
-            normalized_subject = ' '.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'n') for x in
-                                           r['subject']['name'].strip().encode('ascii', 'replace').split(' ')])
-            normalized_object = ' '.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'n') for x in
-                                           r['object']['name'].strip().encode('ascii', 'replace').split(' ')])
-            if (not en_dict.check(normalized_predicate.replace(' ', '-'))) or \
-                    (not en_dict.check(normalized_subject.replace(' ', '-'))) or \
-                    (not en_dict.check(normalized_object.replace(' ', '-'))):
+            normalized_predicate = '_'.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'v') for x in
+                                             r['predicate'].strip('.').strip(',').encode('ascii', 'replace').split()])
+            normalized_subject = '_'.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'n') for x in
+                                           r['subject']['name'].strip('.').strip(',').encode('ascii', 'replace').split()])
+            normalized_object = '_'.join([nltk.stem.WordNetLemmatizer().lemmatize(x, 'n') for x in
+                                           r['object']['name'].strip('.').strip(',').encode('ascii', 'replace').split()])
+
+            if (not en_dict.check(normalized_predicate.replace('_', '-'))) or \
+                    (not en_dict.check(normalized_subject.replace('_', '-'))) or \
+                    (not en_dict.check(normalized_object.replace('_', '-'))):
                 spelling_error_counter += 1
                 # print('Wrong spelling({}):{}-{}-{}\n'.format(spelling_error_counter, normalized_subject, normalized_predicate, normalized_object));
                 continue
 
-            normalized_predicate = '_'.join(normalized_predicate.lower().split(' '))
-            normalized_subject = '_'.join(normalized_subject.lower().split(' '))
-            normalized_object = '_'.join(normalized_object.lower().split(' '))
+            normalized_predicate = normalized_predicate.lower().replace('-', '_')
+            normalized_subject = normalized_subject.lower().replace('-', '_')
+            normalized_object = normalized_object.lower().replace('-', '_')
 
             if len(normalized_predicate) <= 1 or len(normalized_subject) <=1 or len(normalized_object) <=1:
                 length_matching_counter += 1
