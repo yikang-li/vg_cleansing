@@ -66,7 +66,7 @@ for d_id,rs in enumerate(relationships_data):
             relationship_item['subject'] = normalized_subject
             relationship_item['sub_box'] = \
                     (r['subject']['x'], r['subject']['y'], r['subject']['x'] + r['subject']['w'] - 1, \
-                     r['subject']['y'] + r['subject']['h'] - 1)
+                     r['subject']['y'] + r['subject']['h'] - 1)  # index starts from 0
             relationship_item['obj_box'] = \
                     (r['object']['x'], r['object']['y'], r['object']['x'] + r['object']['w'] - 1, \
                      r['object']['y'] + r['object']['h'] - 1)

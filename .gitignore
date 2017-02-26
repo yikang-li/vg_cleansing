@@ -1,4 +1,5 @@
 .idea/
+*.json
 output/
 temp_data/
 models/
