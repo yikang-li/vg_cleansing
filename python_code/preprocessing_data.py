@@ -131,8 +131,8 @@ for d_id, rs in enumerate(relationships_data):
     cap = caption_data[d_id]
     im_item = image_data[d_id]
     print cap['id']
-    print rs['id']
-    assert cap['id'] == rs['id'], 'The two image does not match'
+    print rs['image_id']
+    assert cap['id'] == rs['image_id'], 'The two image does not match'
 
     regions = []
     for region in cap['regions']:
