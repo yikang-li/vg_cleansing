@@ -130,8 +130,6 @@ region_counter = 0
 for d_id, rs in enumerate(relationships_data):
     cap = caption_data[d_id]
     im_item = image_data[d_id]
-    print cap['id']
-    print rs['image_id']
     assert cap['id'] == rs['image_id'], 'The two image does not match'
 
     regions = []
@@ -231,7 +229,7 @@ for d_id, rs in enumerate(relationships_data):
         print(str(d_id) + ' images processed, ' + str(relationship_count) + ' relationships')
 
 del relationships_data, caption_data
-print('Currently, we have ' + str(relationship_count) + ' relationship tuples and {} images'.format(len(relationships.keys())))
+print('Currently, we have ' + str(relationship_count) + ' relationship tuples and {} images'.format(len(data.keys())))
 print('Spelling error: {}'.format(spelling_error_counter))
 print('Length matching error: {}'.format(length_matching_counter))
 # print('word mismatch error: {}'.format(word_mismatch_counter))
